@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Webhook Server - Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>Webhook Server - Dashboard</h1>
+      <p class="subtitle">Página visual de controle</p>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>1 — Criar target de studio</h2>
+        <form id="form-create-studio" class="form">
+          <label>Nome do studio</label>
+          <input type="text" name="studioName" placeholder="Ex: MeuStudio" />
+          <button type="button" class="btn" onclick="handleCreateStudio()">Criar</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>2 — Criar target de webhook</h2>
+        <form id="form-create-webhook" class="form">
+          <label>URL do webhook</label>
+          <input type="url" name="webhookUrl" placeholder="https://exemplo.com/webhook" />
+          <label>Descrição (opcional)</label>
+          <input type="text" name="webhookDesc" placeholder="Descrição" />
+          <button type="button" class="btn" onclick="handleCreateWebhook()">Criar</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>3 — Listar conversations</h2>
+        <div class="list-placeholder">
+          <label>Conversation SID</label>
+          <input type="text" name="conversationSid" id="conversationSid" placeholder="conversation sid" />
+          <button type="button" class="btn" onclick="handleListConversations()">Listar</button>
+          <div id="conversation-result"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>4 — Remover webhook específico</h2>
+        <form id="form-delete-webhook" class="form">
+          <label>ID do webhook</label>
+          <input type="text" name="webhookId" placeholder="id-do-webhook" />
+          <button type="button" class="btn btn-danger" onclick="handleRemoveWebhook()">Remover</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>5 — Limpar conversation</h2>
+        <form id="form-clear-convo" class="form">
+          <label>Conversation SID</label>
+          <input type="text" name="clearConversationSid" id="clearConversationSid" placeholder="CH123..." />
+          <button type="button" class="btn" onclick="handleClearConversation()">Limpar</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>Dashboard conectado aos controllers em twilio/controller</small>
+    </footer>
+
+    <!-- Importa os scripts -->
+    <script src="..//twilio/controller/clean-conversation.js"></script>
+    <script src="..//twilio/controller/list-conversations.js"></script>
+    <script src="index_viewmodel.js"></script>
+  </body>
+</html>

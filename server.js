@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -7,19 +8,19 @@ const PORT = process.env.PORT || 3000;
 // Permite que o Express leia JSON no corpo da requisição
 app.use(bodyParser.json());
 
-// Endpoint que receberá as mensagens
-app.post("/webhook", (req, res) => {
-  console.log("Mensagem recebida:");
-  console.log(req.body);
+// Serve arquivos estáticos (pasta ui)
+app.use(express.static(path.join(__dirname, "ui")));
 
-  // Retorna uma resposta HTTP 200 (OK)
-  res.status(200).send("Mensagem recebida com sucesso!");
-});
-
-// Verificação simples (GET)
+// Página principal (dashboard visual)
 app.get("/", (req, res) => {
-  res.send("Webhook ativo!");
+  res.sendFile(path.join(__dirname, "ui", "index.html"));
 });
+// Importa e configura as rotas do clean-conversation
+require("./service/remove-conversation")(app);
+require("./service/fetch-conversations")(app);
+require("./service/create-webhook")(app);
+require("./service/list-webhooks")(app);
+require("./service/remove-webhook")(app);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
