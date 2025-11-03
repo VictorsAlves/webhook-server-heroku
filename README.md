@@ -31,3 +31,8 @@ O dashboard mostra 5 funcionalidades como placeholders:
 Observações
 
 - As funcionalidades listadas são apenas visuais nesta versão. A lógica do backend será implementada em etapas posteriores.
+
+## rodar testes
+ npm test --coverage
+abrir testes
+open coverage/lcov-report/index.html
